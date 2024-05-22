@@ -70,7 +70,7 @@ def create():
 @app.route('/api/v1/calendar/<id>/', methods=['PUT'])
 def update(id):
     try:
-        data = request.get_data.decode('utf-8')
+        data = request.get_data().decode('utf-8')
         event = from_raw(data)
         event_logic.update(id, event)
         return 'updated', 204

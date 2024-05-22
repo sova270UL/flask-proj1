@@ -29,7 +29,7 @@ class EventDB:
 
     def update(self, id: str, event: model.Event):
         try:
-            return self._storage.update(id, event)
+            return self.storage.update(id, event)
         except Exception as ex:
             raise DBException(f"failed UPDATE operation with: {ex}")
 
