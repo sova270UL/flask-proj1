@@ -60,7 +60,7 @@ def read(id):
 def create():
     '''id|title|text|date'''
     try:
-        data = request.get_data
+        data = request.get_data.decode('utf-8')
         event = from_raw(data)
         id = event_logic.create(event)
         return f'new id: {id}', 201
