@@ -11,6 +11,8 @@ class LocalStorage:
         self.storage = {}
 
     def create(self, event: model.Event) -> str:
+        if event.date in self.storage:
+            raise StorageException('this date: {event.date} is already in use')
         self.id_counter += 1
         event.id = str(self.id_counter)
         self.storage[event.id] = event

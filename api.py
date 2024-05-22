@@ -14,16 +14,16 @@ def from_raw(raw_event) -> model.Event:
     if len(parts) == 4:
         event = model.Event()
         event.id = str(parts[0])
-        event.title = str(parts[1])
-        event.text = str(parts[2])
-        event.date = str(parts[3])
+        event.date = str(parts[1])
+        event.title = str(parts[2])
+        event.text = str(parts[3])
         return event
     elif len(parts) == 3:
         event = model.Event()
         event.id = None
-        event.title = str(parts[0])
-        event.text = str(parts[1])
-        event.date = str(parts[2])
+        event.date = str(parts[0])
+        event.title = str(parts[1])
+        event.text = str(parts[2])
         return event
     else:
         raise apiException(f'Invalid event format {raw_event}')
@@ -58,9 +58,9 @@ def read(id):
 
 @app.route('/api/v1/calendar/', methods=['POST'])
 def create():
-    '''id|title|text|date'''
+    '''date|title|text|'''
     try:
-        data = request.get_data.decode('utf-8')
+        data = request.get_data().decode('utf-8')
         event = from_raw(data)
         id = event_logic.create(event)
         return f'new id: {id}', 201
