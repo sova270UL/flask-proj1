@@ -30,9 +30,9 @@ def from_raw(raw_event) -> model.Event:
     
 def to_raw(event) -> str:
     if event.id:
-        return f'{event.id}|{event.title}|{event.text}|{event.date}'
+        return f'{event.id}|{event.date}|{event.title}|{event.text}'
     else:
-        return f'{event.title}|{event.text}|{event.date}'
+        return f'{event.date}|{event.title}|{event.text}'
     
     
     

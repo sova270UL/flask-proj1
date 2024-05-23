@@ -21,10 +21,17 @@ class Eventlogic:
             raise LogicException('title lenght > max: {title_limit}')
         if event.text is None or len(event.text) > text_limit:
             raise LogicException('text lenght > max: {text}')
-        
-        
+        if event.date is None or len(event.date) > text_limit:
+            raise LogicException('text lenght > max: {text}')
+
+    def valid_date(self, event):
+        for i in self.event_db.list():
+            if event.date == i.date:
+                raise LogicException('date is already exist')
+            
     def create(self, event: model.Event) -> str:
         self.validate_event(event)
+        self.valid_date(event)
         try:
             return self.event_db.create(event)
         except Exception as e:
